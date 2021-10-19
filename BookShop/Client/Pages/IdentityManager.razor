@@ -1,0 +1,28 @@
+﻿@page "/identsett"
+@attribute [Authorize(Roles = "Admin")]
+@inject HttpClient Http
+
+
+
+<h3>RoleManager</h3>
+@if( Roles != null )
+{
+<table>
+    @foreach( var role in Roles )
+    {
+    <tr>
+     <td>
+         @role.Name
+     </td>   
+    </tr>
+    }
+</table>
+}
+@code {
+    private List<RoleModel> Roles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Roles = await Http.GetFromJsonAsync<List<RoleModel>>( "IdentityManager/List" );
+    }
+}
