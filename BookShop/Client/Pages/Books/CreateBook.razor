@@ -1,0 +1,47 @@
+﻿@page "/books/create" 
+@inject HttpClient Http
+@inject NavigationManager Nav
+@attribute [Authorize(Roles ="Admin")]
+
+<h3>Добавить новую книгу</h3>
+@if( model != null )
+{
+<EditForm Model="@model" OnValidSubmit="CreateNewBook">
+    <DataAnnotationsValidator />
+    <label>
+        Название книги:&nbsp;
+        <InputText @bind-Value="@model.Title"></InputText>
+        <ValidationMessage For="@(() => model.Title)"/>
+    </label>
+    <br />
+    <label>
+        Автор книги:&nbsp;
+        <InputText @bind-Value="@model.Author" DisplayName="Автор книги" />
+        <ValidationMessage For="@(() => model.Author)" />
+    </label>
+    <br />
+    <label>
+        Краткое описание книги:&nbsp;
+        <InputTextArea @bind-Value="@model.ShortDescription" DisplayName="Краткое описание"/>
+    </label>
+    <br />
+    <label>
+        Количество страниц в книге
+        <InputNumber @bind-Value="@model.PagesCount" DisplayName="Количество страниц" />
+        <ValidationMessage For="@(() => model.PagesCount)" />
+    </label>
+    <br />
+    <button type="submit">Сохранить</button>
+</EditForm>
+}
+
+@code {
+    private BookModel model = new BookModel();
+
+    private async Task CreateNewBook()
+    {
+        await Http.PostAsJsonAsync<BookModel>( "Book/Create", model );
+        Nav.NavigateTo( "books" );
+
+    }
+}

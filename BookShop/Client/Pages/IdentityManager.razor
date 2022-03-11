@@ -1,28 +1,47 @@
 ﻿@page "/identsett"
 @attribute [Authorize(Roles = "Admin")]
 @inject HttpClient Http
+@inject NavigationManager _navMan
 
 
 
-<h3>RoleManager</h3>
-@if( Roles != null )
+<h3>Настройка пользователей системы</h3>
+<div class="col-lg-4">
+    <button @onclick="GoToRoleSettings" >Редактирование ролей</button>
+</div>
+@if( !IsLoading )
 {
 <table>
-    @foreach( var role in Roles )
+    @foreach( var user in Users )
     {
-    <tr>
-     <td>
-         @role.Name
+    <tr>        
+     <td class="col-3">
+        <input type="hidden" @bind="user.UserId" />
+         @user.Email
      </td>   
+        <td class="col-3">
+            @user.Name
+        </td>
+        <td class="col-3">
+            @user.Roles&nbsp;
+            <a href="#">(Редактировать)</a>
+        </td>
     </tr>
     }
 </table>
 }
 @code {
-    private List<RoleModel> Roles;
+    private List<UserModel> Users;
+    private bool IsLoading = true;
 
     protected override async Task OnInitializedAsync()
+    {       
+        Users = await Http.GetFromJsonAsync<List<UserModel>>( "IdentityManager/UserList" );
+        IsLoading = false;
+    }
+
+    private void GoToRoleSettings()
     {
-        Roles = await Http.GetFromJsonAsync<List<RoleModel>>( "IdentityManager/List" );
+        _navMan.NavigateTo( "/roles" );
     }
 }

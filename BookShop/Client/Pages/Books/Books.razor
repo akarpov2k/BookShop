@@ -1,0 +1,52 @@
+﻿@page "/books"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<h3>Books</h3>
+@if (PageModel != null )
+{
+    if (PageModel.TotalCount > 0 )
+    {
+                    <table class="unborder_table" style="border-spacing: 0px 10px; border-collapse: separate;">
+                        @foreach(var book in PageModel.Items )
+                        {
+                        <tr style="margin-top:10px">
+                            <BookCard Book="@book"></BookCard>
+                        </tr>
+                    }
+                    </table>
+                    <div>
+                        <button >Стрелка влево</button>
+                        @foreach( var pageNum in Enumerable.Range(1, PageModel.TotalPages+1) )
+                    {
+                        <button class="page-num-item" style="max-width:40px">@pageNum</button>
+                    }
+                        <button>Стрелка вправо</button>
+                    </div>
+                }
+                else
+                {
+<p>Книг не найдено.</p>
+                }
+            }
+            else
+            {
+                <p>Loading...</p>
+            }
+<AuthorizeView Roles="Admin">
+    <button @onclick="CreateBook">Добавить книгу</button>
+</AuthorizeView>
+
+@code {
+    private PageItems<BookModel> PageModel;
+
+    protected override async Task OnInitializedAsync()
+    {
+        PageModel = await Http.GetFromJsonAsync<PageItems<BookModel>>( $"Book/List?currentPage={1}" );
+    }
+
+    private void CreateBook()
+    {
+        Nav.NavigateTo( "books/create" );
+    }
+}

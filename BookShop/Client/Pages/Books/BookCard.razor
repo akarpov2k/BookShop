@@ -1,0 +1,21 @@
+﻿
+@if( Book != null )
+{
+    <div style="border:2px solid blue; text-align:center">
+        <p>@Book.Title</p>
+        <input type="hidden" @bind="Book.Id" />
+        <textarea @bind="Book.ShortDescription" readonly="readonly"/><br />
+        <p>Кол-во страниц: @Book.PagesCount</p>
+        <a href="#">@Book.Author</a>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public  BookModel Book { get; set; }
+
+    public void SetBook(BookModel book )
+    {
+        Book = book;
+    }
+}

@@ -48,3 +48,14 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+table, tr, td {
+    border: 1px solid;
+}
+
+.unborder_table{
+    border: none;
+}
+
+.page-num-item{
+    margin: 0px 5px 0px 5px;
+}

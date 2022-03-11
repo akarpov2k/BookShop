@@ -1,5 +1,6 @@
 using BookShop.Server.Data;
 using BookShop.Server.Models;
+using BookShop.Server.SystemModels;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,8 @@ namespace BookShop.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices( IServiceCollection services )
         {
+            var appSettings = Configuration.GetSection( "AppSettings" ).Get<AppSettings>() ?? new AppSettings();
+            services.AddSingleton(appSettings);
             services.AddDbContext<ApplicationDbContext>( options =>
                  options.UseSqlServer(
                      Configuration.GetConnectionString( "DefaultConnection" ) ) );

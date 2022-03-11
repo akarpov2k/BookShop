@@ -91,6 +91,14 @@ namespace BookShop.Server.Areas.Identity.Pages.Account
                             await _userManager.AddToRoleAsync( user, role.Name );
                         }
                     }
+                    else
+                    {
+                        var role = await _roleManager.FindByIdAsync( "User" );
+                        if (role!= null )
+                        {
+                            await _userManager.AddToRoleAsync( user, role.Name );
+                        }
+                    }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

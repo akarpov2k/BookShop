@@ -1,0 +1,43 @@
+﻿@page "/roles"
+@attribute [Authorize(Roles ="Admin")]
+@inject HttpClient Http
+
+<h3>Настройка ролей системы</h3>
+@if(Roles != null )
+            {
+                <table>
+                    @foreach(var role in Roles )
+                {
+                    <tr style="text-align:center">
+                        <td class="col-5">
+                            @role.Name
+                        </td>
+                        <td class="col-2">
+                            @if( role.Name != "Admin" )
+                            {
+                            <button @onclick="() => DeleteRole(role.RoleId)">Удалить</button>
+                            }
+                    else
+                    {
+                        <i>Нельзя удалить роль админа</i>
+                    }
+                        </td>
+                    </tr>
+                }
+                </table>
+                <button>Добавить</button>
+            }
+
+@code {
+    private List<RoleModel> Roles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Roles = await Http.GetFromJsonAsync<List<RoleModel>>( "IdentityManager/RoleList" );
+    }
+    private async Task DeleteRole(string roleId )
+    {
+        await Http.PostAsJsonAsync( "IdentityManager/DeleteRole", roleId );
+        await InvokeAsync( StateHasChanged );
+    }
+}

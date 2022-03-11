@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.Server", "BookShop\Server\BookShop.Server.csproj", "{AB874BA3-ABB5-4DFB-831E-3827BE6C292F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Server", "BookShop\Server\BookShop.Server.csproj", "{AB874BA3-ABB5-4DFB-831E-3827BE6C292F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.Client", "BookShop\Client\BookShop.Client.csproj", "{3A3E7235-A4C7-48E2-BD08-496D21422A92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Client", "BookShop\Client\BookShop.Client.csproj", "{3A3E7235-A4C7-48E2-BD08-496D21422A92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.Shared", "BookShop\Shared\BookShop.Shared.csproj", "{170286D9-9578-4F01-86FF-F4AAE9F6517D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Shared", "BookShop\Shared\BookShop.Shared.csproj", "{170286D9-9578-4F01-86FF-F4AAE9F6517D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTests", "DataTests\DataTests.csproj", "{F87A4399-8D7C-4BA6-A21D-8E072A3E3BEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{170286D9-9578-4F01-86FF-F4AAE9F6517D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170286D9-9578-4F01-86FF-F4AAE9F6517D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170286D9-9578-4F01-86FF-F4AAE9F6517D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F87A4399-8D7C-4BA6-A21D-8E072A3E3BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F87A4399-8D7C-4BA6-A21D-8E072A3E3BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F87A4399-8D7C-4BA6-A21D-8E072A3E3BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F87A4399-8D7C-4BA6-A21D-8E072A3E3BEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
